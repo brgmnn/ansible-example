@@ -1,3 +1,5 @@
+# Download the nodejs setup script from nodesource. This is following the official way to install
+# node on AmazonLinux as it is not provided in the yum repositories.
 - name: Download nodejs setup
   get_url:
     url: https://rpm.nodesource.com/setup_6.x
@@ -5,10 +7,12 @@
     mode: 0555
   become: true
 
+# Run the nodejs setup script to add it to the yum package list.
 - name: Add nodejs to yum repo
   command: /nodejs-setup_6.x.sh
   become: true
 
+# Install nodejs and git
 - name: Install packages
   yum:
     name: "{{ item }}"

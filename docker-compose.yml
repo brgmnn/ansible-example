@@ -9,4 +9,5 @@ services:
       - ./inventory.ini:/etc/ansible/hosts
       - ./roles:/root/roles
       - ./playbook.yml:/root/playbook.yml
+      - ./app-hello-world:/root/app-hello-world
     working_dir: /root
