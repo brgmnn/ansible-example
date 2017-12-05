@@ -1,0 +1,4 @@
+- name: Clone the app repo
+  git:
+    repo: https://github.com/brgmnn/ansible-example.git
+    dest: ~/ansible-example

@@ -1,0 +1,19 @@
+- name: Download nodejs setup
+  get_url:
+    url: https://rpm.nodesource.com/setup_6.x
+    dest: /nodejs-setup_6.x.sh
+    mode: 0555
+  become: true
+
+- name: Add nodejs to yum repo
+  command: /nodejs-setup_6.x.sh
+  become: true
+
+- name: Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nodejs
+    - git
+  become: true

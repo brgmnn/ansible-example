@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  ansible:
+    image: williamyeh/ansible:ubuntu16.04
+    volumes:
+      - ./ansible-example.pem:/root/.ssh/key.pem
+      - ./known_hosts:/root/.ssh/known_hosts
+      - ./inventory.ini:/etc/ansible/hosts
+      - ./roles:/root/roles
+      - ./playbook.yml:/root/playbook.yml
+    working_dir: /root

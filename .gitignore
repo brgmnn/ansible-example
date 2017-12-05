@@ -1,0 +1,3 @@
+*.pem
+/known_hosts
+node_modules

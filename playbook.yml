@@ -1,0 +1,9 @@
+---
+# - hosts: load-balancers
+#   roles:
+#     - nginx
+
+- hosts: web-apps
+  roles:
+    - node
+    - app-hello-world
