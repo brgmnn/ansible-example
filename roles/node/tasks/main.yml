@@ -5,14 +5,17 @@
     url: https://rpm.nodesource.com/setup_6.x
     dest: /nodejs-setup_6.x.sh
     mode: 0555
+  register: get_node
   become: true
 
-# Run the nodejs setup script to add it to the yum package list.
+# Run the nodejs setup script to add it to the yum package list. This step is skipped if the
+# previous step to download node didn't result in a change.
 - name: Add nodejs to yum repo
   command: /nodejs-setup_6.x.sh
+  when: get_node|changed
   become: true
 
-# Install nodejs and git
+# Ensure nodejs and git are installed on the system.
 - name: Install packages
   yum:
     name: "{{ item }}"

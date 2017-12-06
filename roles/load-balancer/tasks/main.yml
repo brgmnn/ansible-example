@@ -1,0 +1,16 @@
+- name: Install nginx
+  yum:
+    name: nginx
+  become: true
+
+- name: Load nginx configuration
+  template:
+    src: /root/app-load-balancer/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  become: true
+
+- name: Restart nginx server
+  service:
+    name: nginx
+    state: restarted
+  become: true

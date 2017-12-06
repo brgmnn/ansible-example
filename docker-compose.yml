@@ -10,4 +10,5 @@ services:
       - ./roles:/root/roles
       - ./playbook.yml:/root/playbook.yml
       - ./app-hello-world:/root/app-hello-world
+      - ./app-load-balancer:/root/app-load-balancer
     working_dir: /root

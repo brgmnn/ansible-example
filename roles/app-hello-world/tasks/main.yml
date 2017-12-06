@@ -20,13 +20,14 @@
 # file template that then is loaded by node, rather than templating HTML files.
 - name: Template file
   template:
-    src: /root/app-hello-world/hello-world.html.j2
+    src: /root/app-hello-world/hello-world.html
     dest: ~/ansible-example/app-hello-world/hello-world.html
 
 # Restart the service with pm2
 - name: Stop existing webapp process
   command: "pm2 delete webapp"
   ignore_errors: true
+  no_log: true
 
 - name: Start the webapp process
   command: pm2 start --name webapp server.js
