@@ -3,6 +3,8 @@ version: '3'
 services:
   ansible:
     image: williamyeh/ansible:ubuntu16.04
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING=false
     volumes:
       - ./ansible-example.pem:/root/.ssh/key.pem
       - ./known_hosts:/root/.ssh/known_hosts
@@ -12,3 +14,4 @@ services:
       - ./app-hello-world:/root/app-hello-world
       - ./app-load-balancer:/root/app-load-balancer
     working_dir: /root
+    command: bash

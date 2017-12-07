@@ -1,35 +1,25 @@
 # Clone the ansible repo. In practice you would probably clone or fetch a project specific repo. It
 # is easier for this example to keep the web app files in a folder under the ansible-example repo.
-- name: Clone the app repo
+- name: Fetch the latest app files
   git:
     repo: https://github.com/brgmnn/ansible-example.git
     dest: ~/ansible-example
+    force: yes
 
 # Runs npm install in the cloned repo
 - name: Install npm modules
   npm:
     path: ~/ansible-example/app-hello-world
 
-- name: Install pm2
-  npm:
-    name: pm2
-    global: yes
-  become: true
-
 # Example of copying a template file. In practice you would probably copy a single configuration
 # file template that then is loaded by node, rather than templating HTML files.
-- name: Template file
+- name: Template app HTML file
   template:
     src: /root/app-hello-world/hello-world.html
     dest: ~/ansible-example/app-hello-world/hello-world.html
 
-# Restart the service with pm2
-- name: Stop existing webapp process
-  command: "pm2 delete webapp"
-  ignore_errors: true
-  no_log: true
-
+# Start or restart the nodejs app with pm2
 - name: Start the webapp process
-  command: pm2 start --name webapp server.js
+  command: pm2 start --name webapp server.js -f
   args:
     chdir: ~/ansible-example/app-hello-world

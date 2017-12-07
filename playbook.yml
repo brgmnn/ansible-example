@@ -1,9 +1,16 @@
 ---
+# applied to all "load-balancers" machines
 - hosts: load-balancers
   roles:
-    - load-balancer
+    # role is as a load balancer
+    - role: load-balancer
+      become: yes # execute as root
 
+# applied to all "web-apps" machines
 - hosts: web-apps
   roles:
-    - node
+    # role includes using node
+    - role: node
+      become: yes # execute as root
+    # role also includes serving the hello world app
     - app-hello-world

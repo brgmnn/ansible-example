@@ -1,16 +1,16 @@
+# Ensure the nginx package is installed
 - name: Install nginx
   yum:
     name: nginx
-  become: true
 
+# Load the load-balancer nginx configuration
 - name: Load nginx configuration
   template:
     src: /root/app-load-balancer/nginx.conf
     dest: /etc/nginx/nginx.conf
-  become: true
 
+# Restart the nginx server
 - name: Restart nginx server
   service:
     name: nginx
     state: restarted
-  become: true
