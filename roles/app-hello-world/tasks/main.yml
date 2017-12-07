@@ -11,12 +11,21 @@
   npm:
     path: ~/ansible-example/app-hello-world
 
+# Get the ANSIBLE_SECRET variable and set it as a fact so we can use it in the templates
+- set_fact: ansible_secret="{{ lookup('env','ANSIBLE_SECRET') }}"
+
 # Example of copying a template file. In practice you would probably copy a single configuration
 # file template that then is loaded by node, rather than templating HTML files.
 - name: Template app HTML file
   template:
     src: /root/app-hello-world/hello-world.html
     dest: ~/ansible-example/app-hello-world/hello-world.html
+
+# Start or restart the nodejs app with pm2
+- name: Stop webapp process
+  command: pm2 kill
+  args:
+    chdir: ~/ansible-example/app-hello-world
 
 # Start or restart the nodejs app with pm2
 - name: Start the webapp process
